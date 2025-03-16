@@ -10,12 +10,9 @@ public class CreateTaskCommandValidator : AbstractValidator<CreateTaskCommand>
     {
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Название задачи обязательно")
-            .MaximumLength(100).WithMessage("Название не должно превышать 100 символов");
+            .MaximumLength(70).WithMessage("Название не должно превышать 70 символов");
 
         RuleFor(x => x.Description)
-            .MaximumLength(500).WithMessage("Описание не должно превышать 500 символов");
-
-        RuleFor(x => x.DueDate)
-            .GreaterThan(DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)).WithMessage("Дата завершения должна быть больше текущей");
+            .MaximumLength(200).WithMessage("Описание не должно превышать 200 символов");
     }
 }
