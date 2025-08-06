@@ -3,8 +3,6 @@ using FluentValidation;
 using MediatR;
 using TaskManager.Application.Common.Behaviors;
 using TaskManager.Application.Extensions;
-using TaskManager.Application.Interfaces.Services;
-using TaskManager.Application.Services;
 using TaskManager.Application.Validators;
 using TaskManager.Infrastructure.Extensions;
 
@@ -18,9 +16,6 @@ builder.Services.AddApplication();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddValidatorsFromAssemblyContaining<CreateTaskCommandValidator>();
-
-// Add services
-builder.Services.AddTransient<ITaskService, TaskService>();
 
 // Add controllers
 builder.Services.AddControllers();

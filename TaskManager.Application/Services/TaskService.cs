@@ -1,22 +1,34 @@
 using TaskManager.Application.DTOs;
 using TaskManager.Application.Interfaces.Services;
+using TaskManager.Application.Mapping;
+using TaskManager.Core.Models;
+using TaskManager.Infrastructure.Interfaces;
 
 namespace TaskManager.Application.Services;
 
 public class TaskService : ITaskService
 {
-    public Task CreateTaskAsync(string title, string description)
+    private readonly ITaskRepository _taskRepository;
+    private readonly TaskMapper _taskMapper;
+
+    public TaskService(ITaskRepository taskRepository, TaskMapper taskMapper)
     {
-        throw new NotImplementedException();
+        _taskRepository = taskRepository;
+        _taskMapper = taskMapper;
+    }
+    
+    public async Task CreateTaskAsync(string title, string description)
+    {
+        await _taskRepository.Create(new TaskEntity { Title = title, Description = description });
     }
 
-    public Task UpdateTaskAsync(TaskDto task)
+    public async Task UpdateTaskAsync(TaskDto task)
     {
-        throw new NotImplementedException();
+        await _taskRepository.Update(_taskMapper.CreateEntity(task));
     }
 
-    public Task DeleteTaskAsync(TaskDto task)
+    public async Task DeleteTaskAsync(TaskDto task)
     {
-        throw new NotImplementedException();
+        await _taskRepository.DeleteByUid(task.Id);
     }
 }
