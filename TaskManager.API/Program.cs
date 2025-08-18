@@ -1,4 +1,5 @@
 using System.Reflection;
+using FluentMigrator.Runner;
 using FluentValidation;
 using MediatR;
 using TaskManager.Application.Common.Behaviors;
@@ -30,6 +31,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+// Apply pending migrations
+using (var scope = app.Services.CreateScope())
+{
+    var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+    runner.MigrateUp();
 }
 
 app.UseHttpsRedirection();

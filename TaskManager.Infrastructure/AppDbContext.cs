@@ -12,11 +12,11 @@ public class AppDbContext : DbContext
         try
         {
             if (Database.CanConnect() == false)
-                throw new InvalidOperationException("База данных не обнаружена.");
+                throw new InvalidOperationException("Database not found.");
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Ошибка при подключении к БД: {ex.Message}");
+            throw new InvalidOperationException($"Error connecting to Database: {ex.Message}");
         }
     }
 
@@ -26,19 +26,19 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<TaskEntity>(entity =>
         {
-            entity.ToTable("Tasks");
-            entity.HasKey(t => t.Id);
+            entity.ToTable("tasks");
+            entity.Property(t => t.Id)
+                .IsRequired()
+                .HasColumnName("task_id");
             entity.Property(t => t.Title)
                 .IsRequired()
                 .HasMaxLength(70);
             entity.Property(t => t.Description)
                 .HasMaxLength(200);
             entity.Property(t => t.Status)
-                .HasConversion<string>(); // Enum -> string в БД
-            // entity.HasOne(t => t.User) 
-            //     .WithMany(u => u.Tasks)
-            //     .HasForeignKey(t => t.UserId)
-            //     .OnDelete(DeleteBehavior.Cascade); // Связь "многие к одному"
+                .HasConversion<int>();
+
+            entity.HasKey(t => t.Id);
         });
     }
 }
