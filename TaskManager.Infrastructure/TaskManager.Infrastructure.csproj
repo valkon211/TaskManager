@@ -7,13 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentMigrator" Version="7.1.0" />
-      <PackageReference Include="FluentMigrator.Runner" Version="7.1.0" />
+      <PackageReference Include="Dapper" Version="2.1.66" />
       <PackageReference Include="MediatR" Version="12.4.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0-preview.1.25080.5" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.8" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
       <PackageReference Include="Npgsql" Version="9.0.3" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     </ItemGroup>
 
     <ItemGroup>

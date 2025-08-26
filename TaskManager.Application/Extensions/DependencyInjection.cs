@@ -1,5 +1,4 @@
 using System.Reflection;
-using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using TaskManager.Application.Interfaces.Services;
 using TaskManager.Application.Mapping;
@@ -15,7 +14,6 @@ public static class DependencyInjection
         services.AddTransient<TaskMapper>();
         
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         return services;
     }

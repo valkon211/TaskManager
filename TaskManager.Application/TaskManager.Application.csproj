@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="11.11.0" />
-      <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-      <PackageReference Include="MediatR" Version="12.4.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0-preview.1.25080.5" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\TaskManager.Core\TaskManager.Core.csproj" />
       <ProjectReference Include="..\TaskManager.Infrastructure\TaskManager.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Common\" />
     </ItemGroup>
 
 </Project>

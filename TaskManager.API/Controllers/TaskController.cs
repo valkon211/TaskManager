@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TaskManager.API.Models;
 using TaskManager.Application.Interfaces.Services;
 
 namespace TaskManager.API.Controllers;
@@ -16,9 +17,9 @@ public class TaskController: ControllerBase
     
     [HttpPost]
     [Route("create")]
-    public async Task<IActionResult> CreateTaskAsync([FromBody] string title, [FromBody] string description)
+    public async Task<IActionResult> CreateTaskAsync([FromBody] CreateTaskRequest request)
     {
-        await _taskService.CreateTaskAsync(title, description);
+        await _taskService.CreateTaskAsync(request.Title, request.Description);
         return Ok();
     }
 }

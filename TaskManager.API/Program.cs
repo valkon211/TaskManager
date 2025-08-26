@@ -1,10 +1,4 @@
-using System.Reflection;
-using FluentMigrator.Runner;
-using FluentValidation;
-using MediatR;
-using TaskManager.Application.Common.Behaviors;
 using TaskManager.Application.Extensions;
-using TaskManager.Application.Validators;
 using TaskManager.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,11 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Infrastructure и Application layer
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-
-// MediatR & FluentValidation
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-builder.Services.AddValidatorsFromAssemblyContaining<CreateTaskCommandValidator>();
 
 // Add controllers
 builder.Services.AddControllers();
@@ -31,13 +20,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-
-// Apply pending migrations
-using (var scope = app.Services.CreateScope())
-{
-    var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
-    runner.MigrateUp();
 }
 
 app.UseHttpsRedirection();
